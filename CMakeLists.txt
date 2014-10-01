@@ -40,7 +40,7 @@ endif()
 # ${gtest_BINARY_DIR}.
 # Language "C" is required for find_package(Threads).
 project(gtest CXX C)
-cmake_minimum_required(VERSION 2.6.2)
+cmake_minimum_required(VERSION 2.8.12)
 
 if (COMMAND set_up_hermetic_build)
   set_up_hermetic_build()
@@ -50,11 +50,6 @@ endif()
 include(cmake/internal_utils.cmake)
 
 config_compiler_and_linker()  # Defined in internal_utils.cmake.
-
-# Where Google Test's .h files can be found.
-include_directories(
-  ${gtest_SOURCE_DIR}/include
-  ${gtest_SOURCE_DIR})
 
 # Where Google Test's libraries can be found.
 link_directories(${gtest_BINARY_DIR}/src)
@@ -79,6 +74,18 @@ endif()
 # aggressive about warnings.
 cxx_library(gtest "${cxx_strict}" src/gtest-all.cc)
 cxx_library(gtest_main "${cxx_strict}" src/gtest_main.cc)
+
+# Where Google Test's .h files can be found.
+target_include_directories(gtest
+  PUBLIC ${gtest_SOURCE_DIR}/include
+  PRIVATE ${gtest_SOURCE_DIR})
+
+install(TARGETS gtest DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+
+target_include_directories(gtest_main
+  PUBLIC ${gtest_SOURCE_DIR}/include
+  PRIVATE ${gtest_SOURCE_DIR})
+
 target_link_libraries(gtest_main gtest)
 
 ########################################################################
