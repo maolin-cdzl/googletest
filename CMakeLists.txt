@@ -84,11 +84,13 @@ target_include_directories(gtest
 
 install(TARGETS gtest DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
+
 target_include_directories(gtest_main
   PUBLIC ${gtest_SOURCE_DIR}/include
   PRIVATE ${gtest_SOURCE_DIR})
 
-target_link_libraries(gtest_main gtest)
+target_link_libraries(gtest_main PUBLIC gtest)
+install(TARGETS gtest_main DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
 
 ########################################################################
 #
