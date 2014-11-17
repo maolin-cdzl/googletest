@@ -66,6 +66,12 @@ if (MSVC AND MSVC_VERSION EQUAL 1700)
   add_definitions(/D _VARIADIC_MAX=10)
 endif()
 
+if( ANDROID )
+	add_definitions(-D__linux__ -D__ANDROID__ -DGTEST_HAS_STREAM_REDIRECTION=1)
+elseif( LINUX )
+	add_definitions(-D__linux__)
+endif()
+
 ########################################################################
 #
 # Defines the gtest & gtest_main libraries.  User tests should link
