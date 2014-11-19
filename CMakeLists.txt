@@ -67,7 +67,7 @@ if (MSVC AND MSVC_VERSION EQUAL 1700)
 endif()
 
 if( ANDROID )
-	add_definitions(-D__linux__ -D__ANDROID__ -DGTEST_HAS_STREAM_REDIRECTION=1)
+	add_definitions(-D__linux__ -D__ANDROID__)
 elseif( LINUX )
 	add_definitions(-D__linux__)
 endif()
