@@ -95,6 +95,9 @@ target_include_directories(gtest_main
 
 target_link_libraries(gtest_main PUBLIC gtest)
 
+install(TARGETS gtest gtest_main DESTINATION ${CMAKE_INSTALL_PREFIX}/lib)
+install(DIRECTORY include/gtest DESTINATION ${CMAKE_INSTALL_PREFIX}/include)
+
 ########################################################################
 #
 # Samples on how to link user tests with gtest or gtest_main.
